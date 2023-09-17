@@ -52,12 +52,12 @@ class ChatApp {
     this.addInfoMessage("Welcome to Forum! The best MsgRoom client!");
   }
 
-  private changeNick(nick: string | null) {
-    if (!nick) return;
+  // private changeNick(nick: string | null) {
+  //   if (!nick) return;
 
-    localStorage.setItem("nick", nick);
-    this.client.name = nick;
-  }
+  //   localStorage.setItem("nick", nick);
+  //   this.client.name = nick;
+  // }
 
   public async connect() {
     // Connect
