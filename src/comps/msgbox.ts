@@ -1,6 +1,8 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
 
+import userAvatar from '/src/images/user.png';
+
 @customElement("message-box")
 export class MessageBox extends LitElement {
   @property({ type: String, reflect: true }) tag = "";
@@ -13,6 +15,8 @@ export class MessageBox extends LitElement {
 
         align-items: flex-start;
         gap: 8px;
+
+        word-wrap: break-word;
 
         /* Boxy look */
         padding: 8px;
@@ -32,9 +36,9 @@ export class MessageBox extends LitElement {
   ];
   render() {
     return html`
-      <img class="avatar" alt="avatar" src="/src/assets/user.png" />
+      <img class="avatar" alt="avatar" src="${userAvatar}" />
       <div class="content">
-        <user-name tag="${this.tag}" >${this.username}</user-name>
+        <user-name tag="${this.tag}">${this.username}</user-name>
         <div class="message"><slot></slot></div>
       </div>
     `;

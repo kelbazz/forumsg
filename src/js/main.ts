@@ -13,6 +13,11 @@ import { html, render } from "lit";
 import Client from "https://esm.sh/msgroom@nightly";
 import { Message, User } from "msgroom/dist/types/events";
 
+// Images
+import userIcon from "/src/images/users.png";
+import botIcon from "/src/images/bots.png";
+import staffIcon from "/src/images/staff.png";
+
 class ChatApp {
   static defaultNick = "Forum User";
 
@@ -21,6 +26,7 @@ class ChatApp {
   private messageInput: HTMLInputElement;
   private msgContainer: HTMLDivElement;
   private userList: HTMLDivElement;
+  private userNick: HTMLDivElement;
 
   constructor() {
     this.checkData();
@@ -37,6 +43,7 @@ class ChatApp {
     this.messageInput = document.querySelector("#msg-box") as HTMLInputElement;
     this.msgContainer = document.querySelector("#msg-container") as HTMLDivElement;
     this.userList = document.querySelector("#user-list") as HTMLDivElement;
+    this.userNick = document.querySelector("#user-nick") as HTMLDivElement;
 
     this.welcomeMessage();
   }
@@ -52,23 +59,38 @@ class ChatApp {
     this.addInfoMessage("Welcome to Forum! The best MsgRoom client!");
   }
 
-  // private changeNick(nick: string | null) {
-  //   if (!nick) return;
+  private changeNick(nick: string | null) {
+    if (!nick) return;
 
-  //   localStorage.setItem("nick", nick);
-  //   this.client.name = nick;
-  // }
+    localStorage.setItem("nick", nick);
+    this.client.name = nick;
+
+    this.renderNickUI();
+  }
 
   public async connect() {
     // Connect
     await this.client.connect();
 
-    // Init Name
-
-
     // Setup
     this.addEventListeners();
     this.renderUserList();
+    this.renderNickUI();
+  }
+  private renderNickUI() {
+
+    render(
+      html`
+        <user-name
+          @click=${() => {
+          this.changeNick(
+            prompt("Enter your nickname", this.client.name) || this.client.name
+          )
+        }}
+        >${this.client.name}</user-name>
+      `,
+      this.userNick
+    );
   }
 
   private addEventListeners() {
@@ -78,6 +100,10 @@ class ChatApp {
     this.client.on("message", this.handleMessage.bind(this));
     this.client.on("user-join", this.handleUserJoin.bind(this));
     this.client.on("user-leave", this.handleUserLeave.bind(this));
+    this.client.on("nick-changed", this.handleNickChanged.bind(this));
+  }
+  private handleNickChanged(user: User) {
+    console.log(user);
   }
 
   private handleSending() {
@@ -134,48 +160,44 @@ class ChatApp {
   }
 
   private renderUserList() {
-    const users: User[] = Object.values(this.client.users);
-    const staff: User[] = [];
-    const bots: User[] = [];
+    const members: { users: User[]; staff: User[]; bots: User[] } = {
+      users: Object.values(this.client.users),
+      staff: [],
+      bots: [],
+    }
 
-    users.forEach((user: User) => {
+    members.users.forEach((user: User) => {
       const { flags } = user;
 
       if (flags.includes("staff")) {
-        staff.push(user);
-        users.splice(users.indexOf(user), 1);
+        members.staff.push(user);
+        members.users.splice(members.users.indexOf(user), 1);
       } else if (flags.includes("bot")) {
-        bots.push(user);
-        users.splice(users.indexOf(user), 1);
+        members.bots.push(user);
+        members.users.splice(members.users.indexOf(user), 1);
       }
     });
 
+    const iconMap = {
+      Staff: staffIcon,
+      Bots: botIcon,
+      Users: userIcon,
+    }
+
     render(
       html`
-        <div class="user-list-header">
-          <img src="/src/assets/staff.png" alt="logo"/>
-          <b>Staff</b>
-        </div>
-        <ul>
-          ${staff.map((user) => html`<li>${user.nickname}</li>`)}
-        </ul>
-
-        <div class="user-list-header">
-          <img src="/src/assets/users.png" alt="logo"/>
-          <b>Users</b>
-        </div>
-        <ul>
-          ${users.map((user) => html`<li>${user.nickname}</li>`)}
-        </ul>
-
-        <div class="user-list-header">
-          <img src="/src/assets/bots.png" alt="logo"/>
-          <b>Bots</b>
-        </div>
-        <ul>
-          ${bots.map((user) => html`<li>${user.nickname}</li>`)}
-        </ul>
-      `,
+        ${["Staff", "Users", "Bots"].map((type) => {
+          return html`
+            <div class="user-list-header">
+              <img src="${(iconMap as Record<string, any>)[type]}" alt="logo" />
+              <b>${type}</b>
+            </div>
+            <ul>
+              ${(members as Record<string, User[]>)[type.toLowerCase()].map((user: User) => html`<li>${user.nickname}</li>`)}
+            </ul>
+          `
+      })}
+  `,
       this.userList
     );
   }
