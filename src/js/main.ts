@@ -153,7 +153,7 @@ class ChatApp {
     render(
       html`
         <div class="user-list-header">
-          <img src="src/assets/staff.png" alt="logo"/>
+          <img src="/src/assets/staff.png" alt="logo"/>
           <b>Staff</b>
         </div>
         <ul>
@@ -161,7 +161,7 @@ class ChatApp {
         </ul>
 
         <div class="user-list-header">
-          <img src="src/assets/users.png" alt="logo"/>
+          <img src="/src/assets/users.png" alt="logo"/>
           <b>Users</b>
         </div>
         <ul>
@@ -169,7 +169,7 @@ class ChatApp {
         </ul>
 
         <div class="user-list-header">
-          <img src="src/assets/bots.png" alt="logo"/>
+          <img src="/src/assets/bots.png" alt="logo"/>
           <b>Bots</b>
         </div>
         <ul>

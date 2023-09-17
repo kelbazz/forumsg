@@ -32,7 +32,7 @@ export class MessageBox extends LitElement {
   ];
   render() {
     return html`
-      <img class="avatar" alt="avatar" src="./src/assets/user.png" />
+      <img class="avatar" alt="avatar" src="/src/assets/user.png" />
       <div class="content">
         <user-name tag="${this.tag}" >${this.username}</user-name>
         <div class="message"><slot></slot></div>
