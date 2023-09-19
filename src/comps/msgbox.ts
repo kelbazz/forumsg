@@ -28,6 +28,10 @@ export class MessageBox extends LitElement {
         box-shadow: 0 2px var(--bluck);
       }
 
+      div.message {
+        margin-top: 2px;
+      }
+
       img.avatar {
         width: 32px;
         aspect-ratio: 1;
