@@ -100,23 +100,122 @@ html {
   }
 
   > #action-bar {
+    border-top: 2px solid var(--bluck);
     padding: 8px;
 
     display: flex;
-
-    align-items: center;
+    flex-direction: column;
     gap: 8px;
 
-    border-top: 2px solid var(--bluck);
+    > #hint-box {
+      display: none;
+      
+      /* Boxy look */
+      padding: 8px;
 
-    > #msg-box {
-      flex: 1;
+      box-shadow: 0 2px var(--bluck);
+      border: 2px solid var(--bluck);
+      border-radius: 8px;
+
+      background-color: var(--kream);
+    }
+
+    > #input-area {
+      display: flex;
+
+      align-items: center;
+      gap: 8px;
+
+      > #emoji-picker {
+        /* Customization */
+        color-scheme: light;
+
+        --emoji-font-family: "Noto Emoji";
+        --background: var(--kream);
+        --border-color: var(--bluck);
+        --border-size: 2px;
+        --indicator-color: var(--puple);
+        --input-border-color: var(--bluck);
+        --input-border-size: 2px;
+        --input-font-color: var(--bluck);
+        --input-placeholder-color: var(--puple);
+        --outline-color: var(--kream);
+        --category-font-color: var(--kream);
+        --button-active-background: var(--bluck);
+        --button-hover-background: var(--puple);
+
+        display: none;
+
+        position: absolute;
+        bottom: 50px;
+        left: 8px;
+
+        &.shown {
+          display: block;
+        }
+      }
+
+      > #msg-box {
+        flex: 1;
+      }
     }
   }
 }
 
-message-box {
-  & p, h1, h2, h3, h4, h5, h6 {
+message-box, #hint-box {
+  & p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     margin: 0;
   }
+}
+
+input {
+  --theme: var(--puple);
+  --highlight: var(--foreground);
+
+  /* Boxy look */
+  padding: 8px;
+
+  box-shadow: 0 2px var(--bluck);
+  border-radius: 8px;
+
+  border: 2px solid var(--bluck);
+
+  background-color: var(--kream);
+  color: var(--highlight);
+
+  padding: 6px;
+
+  font-family: "Figtree", "Noto Emoji";
+  font-weight: medium;
+  font-size: 14px;
+
+  cursor: text;
+
+  &:disabled {
+      opacity: 20%;
+      cursor: not-allowed;
+  }
+
+  &::placeholder {
+    font-style: italic;
+    font-size: 12px;
+
+    color: color-mix(in srgb, var(--theme) 40%, transparent);
+  }
+}
+
+img.emoji {
+  display: inline-block;
+
+  object-fit: contain;
+  width: 16px;
+  aspect-ratio: 1;
+
+  vertical-align: middle;
 }

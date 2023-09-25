@@ -9,15 +9,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "emoji-picker-element": "^1.18.3",
     "events": "^3.3.0",
+    "insert-text-at-cursor": "^0.3.0",
     "lit": "^2.7.6",
     "marked": "^9.0.3",
-    "msgroom-cl-api": "git+https://git.sys36.net/windows-96/online-services/msgroom-cl-api",
-    "profanity-filter": "^0.2.1",
     "sanitize-html": "^2.11.0",
     "socket.io-client": "^4.7.2"
   },
   "devDependencies": {
+    "@types/events": "^3.0.1",
     "typescript": "^5.0.2",
     "vite": "^4.4.5"
   }

@@ -10,8 +10,8 @@
 
     <!-- Script -->
     
-    <script type="module" crossorigin src="/forumsg/assets/index-6cb2552a.js"></script>
-    <link rel="stylesheet" href="/forumsg/assets/index-a0cfce1d.css">
+    <script type="module" crossorigin src="/forumsg/assets/index-3e9a0abd.js"></script>
+    <link rel="stylesheet" href="/forumsg/assets/index-111694cc.css">
   </head>
   <body>
     <div class="container">
@@ -26,13 +26,15 @@
       </div>
 
       <div id="action-bar">
-        <div id="autocomplete"></div>
-        <kz-textbox
-          id="msg-box"
-          accent="purple"
-          placeholder="Type your message here..."
-        ></kz-textbox>
-        <kz-button id="send-button" accent="purple">Send</kz-button>
+        <div id="hint-box">
+        </div>
+        <div id="input-area">
+          <emoji-picker id="emoji-picker" emoji-version="15.0"></emoji-picker>
+
+          <kz-button id="emoji-button" accent="light">😀</kz-button>
+          <input id="msg-box" placeholder="Type your message here..." />
+          <kz-button id="send-button" accent="light">Send</kz-button>
+        </div>
       </div>
     </div>
   </body>

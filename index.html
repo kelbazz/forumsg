@@ -24,13 +24,15 @@
       </div>
 
       <div id="action-bar">
-        <div id="autocomplete"></div>
-        <kz-textbox
-          id="msg-box"
-          accent="purple"
-          placeholder="Type your message here..."
-        ></kz-textbox>
-        <kz-button id="send-button" accent="purple">Send</kz-button>
+        <div id="hint-box">
+        </div>
+        <div id="input-area">
+          <emoji-picker id="emoji-picker" emoji-version="15.0"></emoji-picker>
+
+          <kz-button id="emoji-button" accent="light">😀</kz-button>
+          <input id="msg-box" placeholder="Type your message here..." />
+          <kz-button id="send-button" accent="light">Send</kz-button>
+        </div>
       </div>
     </div>
   </body>
