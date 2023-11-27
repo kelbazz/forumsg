@@ -219,6 +219,20 @@ class ChatApp extends EventTarget {
       }
     },
     {
+        aliases: ["connect", "cs"],
+        description: "Connect to a different server",
+        args: [
+            {
+                name: "server",
+                description: "The server to connect to",
+                type: String,
+            }
+        ],
+        action({ args }) {
+            location.href = `?server=${args.server}`;
+        },
+    },
+    {
       aliases: ["block"],
       description: "Block a user",
       args: [
