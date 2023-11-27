@@ -37,6 +37,10 @@ html {
     gap: 8px;
 
     border-bottom: 2px solid var(--bluck);
+
+    > #user-nick {
+        cursor: pointer;
+    }
   }
 
   > #middle-zone {
@@ -108,7 +112,10 @@ html {
     gap: 8px;
 
     > #hint-box {
+      position: relative;
       display: none;
+
+      overflow: hidden;
       
       /* Boxy look */
       padding: 8px;
@@ -118,6 +125,27 @@ html {
       border-radius: 8px;
 
       background-color: var(--kream);
+
+      > .hint-close {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+
+        width: 12px;
+        aspect-ratio: 1;
+
+        cursor: pointer;
+
+        opacity: 0;
+        translate: 0 -100%;
+
+        transition: all .25s var(--wavey-out);
+      }
+
+      &:hover > .hint-close {
+        opacity: 1;
+        translate: 0;
+      }
     }
 
     > #input-area {
@@ -140,7 +168,7 @@ html {
         --input-font-color: var(--bluck);
         --input-placeholder-color: var(--puple);
         --outline-color: var(--kream);
-        --category-font-color: var(--kream);
+        --category-font-color: var(--bluck);
         --button-active-background: var(--bluck);
         --button-hover-background: var(--puple);
 
@@ -174,7 +202,7 @@ message-box, #hint-box {
   }
 }
 
-input {
+#msg-box, input {
   --theme: var(--puple);
   --highlight: var(--foreground);
 
@@ -195,7 +223,11 @@ input {
   font-weight: medium;
   font-size: 14px;
 
+  height: 18px;
+
   cursor: text;
+  resize: none;
+  overflow-y: hidden;
 
   &:disabled {
       opacity: 20%;

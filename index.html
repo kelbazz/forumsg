@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Forum</title>
 
+    <link rel="shortcut icon" href="/src/images/forumLogo.png" type="image/png">
+
     <!-- Styles -->
     <link rel="stylesheet" href="/src/css/main.css" />
 
@@ -15,6 +17,7 @@
     <div class="container">
       <div id="title-bar" role="heading">
         <div id="user-nick"></div>
+        <kz-title type="subheading" accent="purple">Forum</kz-title>
         <kz-button id="menu-button" accent="purple">Menu</kz-button>
       </div>
 
@@ -30,7 +33,7 @@
           <emoji-picker id="emoji-picker" emoji-version="15.0"></emoji-picker>
 
           <kz-button id="emoji-button" accent="light">😀</kz-button>
-          <input id="msg-box" placeholder="Type your message here..." />
+          <textarea id="msg-box" placeholder="Type here to write..."></textarea>
           <kz-button id="send-button" accent="light">Send</kz-button>
         </div>
       </div>
