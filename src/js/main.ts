@@ -595,6 +595,7 @@ class ChatApp extends EventTarget {
   //   }
   // }
 
+  //@ts-ignore
   private inputSelect(start: number = 0, end?: number) {
     // Get selection
     const selection = getSelection();
