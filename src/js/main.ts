@@ -178,10 +178,7 @@ class ChatApp extends EventTarget {
             this.showHint(html`
                 <b>Changelog:</b>
                 <ul>
-                    <li>Multiline messages</li>
-                    <li>Close button for hints</li>
-                    <li>Possibility to connect to a different server (MRCS)</li>
-                    <li>New emojis <custom-emoji emoji="hakcan"></custom-emoji></li>
+                    <li>No more cors unblocker needed <custom-emoji emoji="hakcan"></custom-emoji></li>
                 </ul>
             `);
         }
@@ -322,14 +319,10 @@ class ChatApp extends EventTarget {
 
     // Connect
     this.connect().catch(() => {
-      const isFirefox = navigator.userAgent.includes("Firefox");
-
       this.showPopup({
         title: "Error while connecting to MsgRoom 😢",
         content: `
           <b>The problem could be due to:</b>
-          - The CORS Unblocker extension is not installed
-          - The CORS Unblocker extension is not enabled
           - Your internet connection is down
           - The server is down
           - You're banned <custom-emoji emoji="bonkcat"></custom-emoji>
@@ -338,17 +331,6 @@ class ChatApp extends EventTarget {
           {
             label: "Retry",
             action: () => location.reload()
-          },
-          {
-            label: `Install CORS Unblock from ${isFirefox ? "Mozilla Addons" : "Chrome Web Store"}`,
-            action() {
-              window.open(
-                isFirefox
-                  ? "https://addons.mozilla.org/fr/firefox/addon/cors-unblock/"
-                  : "https://chromewebstore.google.com/detail/cors-unblock/lfhmikememgdcahcdlaciloancbhjino",
-                "_blank"
-              );
-            }
           }
         ]
       })
